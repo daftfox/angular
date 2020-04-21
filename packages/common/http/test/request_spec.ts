@@ -151,7 +151,7 @@ const TEST_STRING = `I'm a body!`;
         const withParams = baseReq.clone({body: params});
         expect(withParams.serializeBody()).toEqual('first=value&second=other');
         expect(withParams.detectContentTypeHeader())
-          .toEqual('application/x-www-form-urlencoded;charset=UTF-8');
+            .toEqual('application/x-www-form-urlencoded;charset=UTF-8');
       });
     });
     describe('parameter handling', () => {

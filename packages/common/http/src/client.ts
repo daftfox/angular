@@ -28,16 +28,16 @@ import {HttpEvent, HttpResponse} from './response';
  *
  */
 function addBody<T>(
-  options: {
-    headers?: HttpHeaders|{[header: string]: string | string[]},
-    observe?: HttpObserve,
-    params?: HttpParams|{[param: string]: string | string[]},
-    reportProgress?: boolean,
-    responseType?: 'arraybuffer'|'blob'|'json'|'text',
-    withCredentials?: boolean,
-    timeout?: number,
-  },
-  body: T|null): any {
+    options: {
+      headers?: HttpHeaders|{[header: string]: string | string[]},
+      observe?: HttpObserve,
+      params?: HttpParams|{[param: string]: string | string[]},
+      reportProgress?: boolean,
+      responseType?: 'arraybuffer'|'blob'|'json'|'text',
+      withCredentials?: boolean,
+      timeout?: number,
+    },
+    body: T|null): any {
   return {
     body,
     headers: options.headers,
@@ -514,7 +514,7 @@ export class HttpClient {
     // inside an Observable chain, which causes interceptors to be re-run on every
     // subscription (this also makes retries re-run the handler, including interceptors).
     const events$: Observable<HttpEvent<any>> =
-      of(req).pipe(concatMap((req: HttpRequest<any>) => this.handler.handle(req)));
+        of(req).pipe(concatMap((req: HttpRequest<any>) => this.handler.handle(req)));
 
     // If coming via the API signature which accepts a previously constructed HttpRequest,
     // the only option is to get the event stream. Otherwise, return the event stream if
@@ -527,7 +527,7 @@ export class HttpClient {
     // case, the first step is to filter the event stream to extract a stream of
     // responses(s).
     const res$: Observable<HttpResponse<any>> = <Observable<HttpResponse<any>>>events$.pipe(
-      filter((event: HttpEvent<any>) => event instanceof HttpResponse));
+        filter((event: HttpEvent<any>) => event instanceof HttpResponse));
 
     // Decide which stream to return.
     switch (options.observe || 'body') {

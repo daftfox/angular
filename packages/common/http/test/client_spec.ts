@@ -96,11 +96,11 @@ import {toArray} from 'rxjs/operators';
     describe('makes a POST request', () => {
       it('with text data', done => {
         client.post('/test', 'text body', {observe: 'response', responseType: 'text'})
-          .subscribe(res => {
-            expect(res.ok).toBeTruthy();
-            expect(res.status).toBe(200);
-            done();
-          });
+            .subscribe(res => {
+              expect(res.ok).toBeTruthy();
+              expect(res.status).toBe(200);
+              done();
+            });
         backend.expectOne('/test').flush('hello world');
       });
       it('with json data', done => {
@@ -150,7 +150,7 @@ import {toArray} from 'rxjs/operators';
       it('with properly set method and callback', done => {
         client.jsonp('/test', 'myCallback').subscribe(() => done());
         backend.expectOne({method: 'JSONP', url: '/test?myCallback=JSONP_CALLBACK'})
-          .flush('hello world');
+            .flush('hello world');
       });
     });
     describe('makes a request for an error response', () => {
@@ -160,7 +160,7 @@ import {toArray} from 'rxjs/operators';
           done();
         });
         backend.expectOne('/test').flush(
-          {'data': 'hello world'}, {status: 500, statusText: 'Server error'});
+            {'data': 'hello world'}, {status: 500, statusText: 'Server error'});
       });
     });
   });

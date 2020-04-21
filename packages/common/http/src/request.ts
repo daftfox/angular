@@ -89,7 +89,7 @@ export class HttpRequest<T> {
   /**
    * Outgoing headers for this request.
    */
-    // TODO(issue/24571): remove '!'.
+  // TODO(issue/24571): remove '!'.
   readonly headers!: HttpHeaders;
 
   /**
@@ -126,7 +126,7 @@ export class HttpRequest<T> {
   /**
    * Outgoing URL parameters.
    */
-    // TODO(issue/24571): remove '!'.
+  // TODO(issue/24571): remove '!'.
   readonly params!: HttpParams;
 
   /**
@@ -159,22 +159,22 @@ export class HttpRequest<T> {
     timeout?: number,
   });
   constructor(
-    method: string, readonly url: string, third?: T|{
-      headers?: HttpHeaders,
-      reportProgress?: boolean,
-      params?: HttpParams,
-      responseType?: 'arraybuffer'|'blob'|'json'|'text',
-      withCredentials?: boolean,
-      timeout?: number,
-    }|null,
-    fourth?: {
-      headers?: HttpHeaders,
-      reportProgress?: boolean,
-      params?: HttpParams,
-      responseType?: 'arraybuffer'|'blob'|'json'|'text',
-      withCredentials?: boolean,
-      timeout?: number,
-    }) {
+      method: string, readonly url: string, third?: T|{
+        headers?: HttpHeaders,
+        reportProgress?: boolean,
+        params?: HttpParams,
+        responseType?: 'arraybuffer'|'blob'|'json'|'text',
+        withCredentials?: boolean,
+        timeout?: number,
+      }|null,
+      fourth?: {
+        headers?: HttpHeaders,
+        reportProgress?: boolean,
+        params?: HttpParams,
+        responseType?: 'arraybuffer'|'blob'|'json'|'text',
+        withCredentials?: boolean,
+        timeout?: number,
+      }) {
     this.method = method.toUpperCase();
     // Next, need to figure out which argument holds the HttpRequestInit
     // options, if any.
@@ -259,7 +259,7 @@ export class HttpRequest<T> {
     // Check whether the body is already in a serialized form. If so,
     // it can just be returned directly.
     if (isArrayBuffer(this.body) || isBlob(this.body) || isFormData(this.body) ||
-      typeof this.body === 'string') {
+        typeof this.body === 'string') {
       return this.body;
     }
     // Check whether the body is an instance of HttpUrlEncodedParams.
@@ -268,7 +268,7 @@ export class HttpRequest<T> {
     }
     // Check whether the body is an object or array, and serialize with JSON if so.
     if (typeof this.body === 'object' || typeof this.body === 'boolean' ||
-      Array.isArray(this.body)) {
+        Array.isArray(this.body)) {
       return JSON.stringify(this.body);
     }
     // Fall back on toString() for everything else.
@@ -310,7 +310,7 @@ export class HttpRequest<T> {
     }
     // Arrays, objects, and numbers will be encoded as JSON.
     if (typeof this.body === 'object' || typeof this.body === 'number' ||
-      Array.isArray(this.body)) {
+        Array.isArray(this.body)) {
       return 'application/json';
     }
     // No type could be inferred.
@@ -372,9 +372,9 @@ export class HttpRequest<T> {
     // Carefully handle the boolean options to differentiate between
     // `false` and `undefined` in the update args.
     const withCredentials =
-      (update.withCredentials !== undefined) ? update.withCredentials : this.withCredentials;
+        (update.withCredentials !== undefined) ? update.withCredentials : this.withCredentials;
     const reportProgress =
-      (update.reportProgress !== undefined) ? update.reportProgress : this.reportProgress;
+        (update.reportProgress !== undefined) ? update.reportProgress : this.reportProgress;
 
     // Headers and params may be appended to if `setHeaders` or
     // `setParams` are used.
@@ -386,15 +386,15 @@ export class HttpRequest<T> {
     if (update.setHeaders !== undefined) {
       // Set every requested header.
       headers =
-        Object.keys(update.setHeaders)
-          .reduce((headers, name) => headers.set(name, update.setHeaders![name]), headers);
+          Object.keys(update.setHeaders)
+              .reduce((headers, name) => headers.set(name, update.setHeaders![name]), headers);
     }
 
     // Check whether the caller has asked to set params.
     if (update.setParams) {
       // Set every requested param.
       params = Object.keys(update.setParams)
-        .reduce((params, param) => params.set(param, update.setParams![param]), params);
+                   .reduce((params, param) => params.set(param, update.setParams![param]), params);
     }
 
     // Finally, construct the new HttpRequest using the pieces from above.

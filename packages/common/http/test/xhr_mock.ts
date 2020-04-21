@@ -72,12 +72,12 @@ export class MockXMLHttpRequest {
     this.body = body;
   }
 
-  addEventListener(event: 'error'|'load'|'timeout'|'progress'|'uploadProgress', handler: Function):
-    void {
+  addEventListener(event: 'error'|'load'|'progress'|'timeout'|'uploadProgress', handler: Function):
+      void {
     this.listeners[event] = handler as any;
   }
 
-  removeEventListener(event: 'error'|'load'|'timeout'|'progress'|'uploadProgress'): void {
+  removeEventListener(event: 'error'|'load'|'progress'|'timeout'|'uploadProgress'): void {
     delete this.listeners[event];
   }
 
@@ -121,8 +121,7 @@ export class MockXMLHttpRequest {
   }
 
   mockTimeoutEvent(): void {
-    const mockProgressEvent =
-      {isTrusted: true, lengthComputable: false, loaded: 0, total: 0, type: 'timeout'};
+    const mockProgressEvent = {lengthComputable: false, loaded: 0, total: 0, type: 'timeout'};
     if (this.listeners.timeout) {
       this.listeners.timeout(mockProgressEvent as ProgressEvent);
     }
